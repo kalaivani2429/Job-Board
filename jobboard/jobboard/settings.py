@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os
-from decouple import config
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -80,19 +80,15 @@ WSGI_APPLICATION = 'jobboard.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": os.environ.get("ENGINE", default=config("ENGINE")),
-        "NAME": os.environ.get("DATABASE_NAME", default=config("DATABASE_NAME")),
-        "USER": os.environ.get("DATABASE_USER", default=config("DATABASE_USER")),
-        "PASSWORD": os.environ.get(
-            "DATABASE_PASSWORD", default=config("DATABASE_PASSWORD")
-        ),
-        "HOST": os.environ.get("DATABASE_HOST", default=config("DATABASE_HOST")),
-        "PORT": os.environ.get("DATABASE_PORT", default=config("DATABASE_PORT")),
-       
+    'default': {
+       'ENGINE': 'django.db.backends.postgresql',  
+        'NAME': 'postgres',  
+        'USER': 'postgres',  
+        'PASSWORD': 'postgres',  
+        'HOST': 'localhost',  
+        'PORT': '5432',  
     }
 }
-
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
