@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+from decouple import config
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -52,7 +54,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-CORS_ALLOW_ALL_ORIGINS = True 
+CORS_ALLOW_ALL_ORIGINS = True
 
 ROOT_URLCONF = 'jobboard.urls'
 
@@ -79,13 +81,16 @@ WSGI_APPLICATION = 'jobboard.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-       'ENGINE': 'django.db.backends.postgresql',  
-        'NAME': 'postgres',  
-        'USER': 'postgres',  
-        'PASSWORD': 'postgres',  
-        'HOST': 'localhost',  
-        'PORT': '5432',  
+    "default": {
+        "ENGINE": os.environ.get("ENGINE", default=config("ENGINE")),
+        "NAME": os.environ.get("DATABASE_NAME", default=config("DATABASE_NAME")),
+        "USER": os.environ.get("DATABASE_USER", default=config("DATABASE_USER")),
+        "PASSWORD": os.environ.get(
+            "DATABASE_PASSWORD", default=config("DATABASE_PASSWORD")
+        ),
+        "HOST": os.environ.get("DATABASE_HOST", default=config("DATABASE_HOST")),
+        "PORT": os.environ.get("DATABASE_PORT", default=config("DATABASE_PORT")),
+
     }
 }
 
