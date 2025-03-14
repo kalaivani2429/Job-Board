@@ -33,7 +33,7 @@ def scrape_jobs(request):
     return Response({'message': 'Jobs scraped successfully!'})
 
 
-@api_view(['GET'])
+@api_view(['GET', 'HEAD'])  # Ensure 'HEAD' is included
 def api_root(request):
     return Response({
         "jobs": "/api/jobs/",
